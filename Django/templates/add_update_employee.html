@@ -1,0 +1,29 @@
+
+
+Add update · HTML
+{% extends "base.html" %}
+ 
+{% block title %}{% if form.instance.pk %}Edit Employee{% else %}Add Employee{% endif %}{% endblock %}
+ 
+{% block content %}
+ 
+<h1>{% if form.instance.pk %}Edit Employee{% else %}Add New Employee{% endif %}</h1>
+ 
+<div class="panel">
+  <form method="post" enctype="multipart/form-data" class="employee-form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <table class="form-table">
+      {{ form.as_table }}
+    </table>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">
+        {% if form.instance.pk %}Update{% else %}Add Employee{% endif %}
+      </button>
+      <a href="{% url 'home' %}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+ 
+{% endblock %}
+ 

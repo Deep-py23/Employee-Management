@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Employee{% endblock %}
+
+{% block content %}
+
+<h1>Delete Employee</h1>
+
+<div class="panel">
+  <div class="alert alert-danger">
+    Are you sure you want to delete <strong>{{ employee.first_name }} {{ employee.last_name }}</strong>?
+    This action cannot be undone.
+  </div>
+
+  <div class="profile-header">
+    <img class="avatar avatar-lg" src="{{ employee.image.url }}" alt="{{ employee.first_name }}">
+    <div>
+      <div class="fw-semibold">{{ employee.email }}</div>
+      <div class="text-muted">{{ employee.get_designation_display }} &middot; {{ employee.department|default:"No department" }}</div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    </form>
+    <a href="{% url 'employee_detail' employee.id %}" class="btn btn-outline-secondary">Cancel</a>
+  </div>
+</div>
+
+{% endblock %}
