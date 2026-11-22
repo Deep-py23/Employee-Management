@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from accounts import views as AccountsViews
+from accounts import views as accounts_views
+from django.contrib.auth.views import LoginView, LogoutView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -28,8 +29,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('employee/', include('employees.urls')),
-    path('register/', AccountsViews.register, name='register'),
-    path('login/', AccountsViews.login, name='login'),
-    path('logout/', AccountsViews.logout, name='logout'),
+    path('register/', accounts_views.register, name='register'),
+    path('login/', LoginView.as_view(
+            template_name='accounts/login.html',
+            redirect_authenticated_user=True,), name='login'),
+
+    path('logout/', LogoutView.as_view(),  name='logout'),
 ]
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
