@@ -58,6 +58,4 @@ python manage.py runserver
 
 Then open http://127.0.0.1:8000/ in your browser.
 
-## Author
 
-Deep ([@Deep-py23](https://github.com/Deep-py23))
