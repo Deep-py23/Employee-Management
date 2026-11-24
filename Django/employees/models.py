@@ -29,9 +29,9 @@ class Employee(models.Model):
     is_active = models.BooleanField(default=True)
     phone_number = models.CharField(max_length=12)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, 
-                                   blank=True, null=True)
-    manager = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True)
-    user = models.OneToOneField(User, on_delete=models.SET_NULL,
+                                   blank=True, null=True, related_name='employee')
+    manager = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True, related_name='employee')
+    user= models.OneToOneField(User, on_delete=models.SET_NULL,
                                  null=True, blank=True, 
                                  related_name='employee')
 
